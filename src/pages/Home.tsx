@@ -104,15 +104,15 @@ export default function Home() {
               </div>
             </Link>
             
-            <Link to="/products?category=fashion" className="relative rounded-lg overflow-hidden aspect-square group card-hover">
+            <Link to="/products?category=clothing" className="relative rounded-lg overflow-hidden aspect-square group card-hover">
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10" />
               <img
                 src="https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=1471&auto=format&fit=crop"
-                alt="Fashion"
+                alt="Clothing"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                <h3 className="text-xl font-medium text-white">Fashion</h3>
+                <h3 className="text-xl font-medium text-white">Clothing</h3>
                 <p className="text-white/80 mt-1">Timeless pieces that last</p>
               </div>
             </Link>

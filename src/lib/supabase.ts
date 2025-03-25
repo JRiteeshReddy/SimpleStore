@@ -51,3 +51,63 @@ export type OrderItem = {
   price: number;
   product?: Product;
 };
+
+// Initialize demo products
+export const initializeDemoProducts = async () => {
+  // Check for fashion products
+  const { data: fashionProducts, error: checkError } = await supabase
+    .from('products')
+    .select('id')
+    .eq('category', 'fashion')
+    .limit(1);
+    
+  if (checkError) {
+    console.error('Error checking for fashion products:', checkError);
+    return;
+  }
+  
+  // If no fashion products exist, add them
+  if (!fashionProducts || fashionProducts.length === 0) {
+    const fashionItems = [
+      {
+        title: 'Designer Silk Scarf',
+        description: 'Elegant silk scarf with artistic print, perfect for any occasion',
+        price: 1899,
+        image_url: 'https://images.unsplash.com/photo-1584285405429-136507366308?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+        category: 'fashion'
+      },
+      {
+        title: 'Leather Crossbody Bag',
+        description: 'Stylish genuine leather bag with adjustable strap and multiple compartments',
+        price: 2999,
+        image_url: 'https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+        category: 'fashion'
+      },
+      {
+        title: 'Classic Aviator Sunglasses',
+        description: 'Timeless aviator design with polarized lenses and UV protection',
+        price: 1299,
+        image_url: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+        category: 'fashion'
+      },
+      {
+        title: 'Gold Hoop Earrings',
+        description: 'Minimalist 18k gold plated hoop earrings for everyday elegance',
+        price: 999,
+        image_url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+        category: 'fashion'
+      }
+    ];
+    
+    // Insert fashion products
+    const { error: insertError } = await supabase
+      .from('products')
+      .insert(fashionItems);
+      
+    if (insertError) {
+      console.error('Error adding fashion products:', insertError);
+    } else {
+      console.log('Successfully added fashion products');
+    }
+  }
+};

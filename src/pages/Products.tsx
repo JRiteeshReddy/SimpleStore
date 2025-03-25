@@ -19,7 +19,7 @@ export default function Products() {
   // Filters
   const [search, setSearch] = useState(searchParams.get('search') || '');
   const [category, setCategory] = useState(searchParams.get('category') || 'all');
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
   const [sortBy, setSortBy] = useState(searchParams.get('sort') || 'newest');
   
   // Load products and categories
@@ -105,7 +105,7 @@ export default function Products() {
     setSearch('');
     setCategory('all');
     setSortBy('newest');
-    setPriceRange([0, 1000]);
+    setPriceRange([0, 10000]);
     setSearchParams({});
   };
   
@@ -166,15 +166,15 @@ export default function Products() {
               <h3 className="font-medium mb-3">Price Range</h3>
               <div className="px-2">
                 <Slider
-                  defaultValue={[0, 1000]}
-                  max={1000}
-                  step={10}
+                  defaultValue={[0, 10000]}
+                  max={10000}
+                  step={100}
                   value={priceRange}
                   onValueChange={(value) => setPriceRange(value as [number, number])}
                 />
                 <div className="flex justify-between mt-2 text-sm text-muted-foreground">
-                  <span>${priceRange[0]}</span>
-                  <span>${priceRange[1]}</span>
+                  <span>₹{priceRange[0]}</span>
+                  <span>₹{priceRange[1]}</span>
                 </div>
               </div>
             </div>

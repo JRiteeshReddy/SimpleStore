@@ -3,9 +3,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
+import { useEffect } from "react";
+import { initializeDemoProducts } from "@/lib/supabase";
 
 // Pages
 import Home from "@/pages/Home";
@@ -20,6 +22,18 @@ import AccountOrders from "@/pages/AccountOrders";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
+
+// Initialize app data
+function AppInitializer() {
+  const location = useLocation();
+  
+  useEffect(() => {
+    // Initialize demo products
+    initializeDemoProducts();
+  }, []);
+  
+  return null;
+}
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -42,6 +56,7 @@ const App = () => (
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <AppInitializer />
           </BrowserRouter>
         </TooltipProvider>
       </CartProvider>
