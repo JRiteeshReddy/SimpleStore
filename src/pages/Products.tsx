@@ -18,7 +18,7 @@ export default function Products() {
   
   // Filters
   const [search, setSearch] = useState(searchParams.get('search') || '');
-  const [category, setCategory] = useState(searchParams.get('category') || '');
+  const [category, setCategory] = useState(searchParams.get('category') || 'all');
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
   const [sortBy, setSortBy] = useState(searchParams.get('sort') || 'newest');
   
@@ -41,7 +41,7 @@ export default function Products() {
         let query = supabase.from('products').select('*');
         
         // Apply category filter
-        if (categoryParam) {
+        if (categoryParam && categoryParam !== 'all') {
           query = query.eq('category', categoryParam);
         }
         
@@ -94,7 +94,7 @@ export default function Products() {
     const params = new URLSearchParams();
     
     if (search) params.set('search', search);
-    if (category) params.set('category', category);
+    if (category && category !== 'all') params.set('category', category);
     params.set('sort', sortBy);
     
     setSearchParams(params);
@@ -103,7 +103,7 @@ export default function Products() {
   // Reset filters
   const resetFilters = () => {
     setSearch('');
-    setCategory('');
+    setCategory('all');
     setSortBy('newest');
     setPriceRange([0, 1000]);
     setSearchParams({});
@@ -152,7 +152,7 @@ export default function Products() {
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Categories</SelectItem>
+                  <SelectItem value="all">All Categories</SelectItem>
                   {categories.map((cat) => (
                     <SelectItem key={cat} value={cat}>
                       {cat.charAt(0).toUpperCase() + cat.slice(1)}
