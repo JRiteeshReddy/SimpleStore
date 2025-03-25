@@ -58,11 +58,12 @@ export default function ProductDetail() {
     loadProduct();
   }, [id]);
   
-  // Format price
+  // Format price in Indian Rupees
   const formattedPrice = product 
-    ? new Intl.NumberFormat('en-US', {
+    ? new Intl.NumberFormat('en-IN', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'INR',
+        maximumFractionDigits: 0
       }).format(product.price)
     : '';
     
@@ -133,15 +134,15 @@ export default function ProductDetail() {
         {/* Product Image */}
         <div className="aspect-square bg-secondary/30 rounded-lg overflow-hidden">
           <img
-            src={product.image_url}
-            alt={product.title}
+            src={product?.image_url}
+            alt={product?.title}
             className="w-full h-full object-cover"
           />
         </div>
         
         {/* Product Info */}
         <div className="space-y-6">
-          <h1 className="text-3xl font-bold">{product.title}</h1>
+          <h1 className="text-3xl font-bold">{product?.title}</h1>
           
           <div className="text-2xl font-semibold">{formattedPrice}</div>
           
@@ -149,13 +150,13 @@ export default function ProductDetail() {
           
           <div>
             <h3 className="font-medium mb-2">Description</h3>
-            <p className="text-muted-foreground">{product.description}</p>
+            <p className="text-muted-foreground">{product?.description}</p>
           </div>
           
           <div>
             <h3 className="font-medium mb-2">Category</h3>
             <div className="inline-block bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-sm">
-              {product.category}
+              {product?.category}
             </div>
           </div>
           

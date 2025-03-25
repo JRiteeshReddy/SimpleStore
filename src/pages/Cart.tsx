@@ -13,11 +13,12 @@ export default function Cart() {
   const { cartItems, removeFromCart, updateQuantity, clearCart, cartTotal, isLoading } = useCart();
   const { user } = useAuth();
   
-  // Format currency
+  // Format currency in Indian Rupees
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
+      maximumFractionDigits: 0
     }).format(amount);
   };
   

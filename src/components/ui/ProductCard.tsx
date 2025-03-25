@@ -21,10 +21,11 @@ export default function ProductCard({ product, className }: ProductCardProps) {
     addToCart(product);
   };
   
-  // Format price
-  const formattedPrice = new Intl.NumberFormat('en-US', {
+  // Format price in Indian Rupees
+  const formattedPrice = new Intl.NumberFormat('en-IN', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'INR',
+    maximumFractionDigits: 0
   }).format(product.price);
   
   return (

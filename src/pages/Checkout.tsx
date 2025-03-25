@@ -35,7 +35,7 @@ function Checkout() {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
-  const [country, setCountry] = useState('US');
+  const [country, setCountry] = useState('IN');
   
   // Payment state
   const [cardNumber, setCardNumber] = useState('');
@@ -46,11 +46,12 @@ function Checkout() {
   // Loading state
   const [loading, setLoading] = useState(false);
   
-  // Format currency
+  // Format currency in Indian Rupees
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
+      maximumFractionDigits: 0
     }).format(amount);
   };
   
@@ -215,7 +216,7 @@ function Checkout() {
                     <Label htmlFor="city">City</Label>
                     <Input
                       id="city"
-                      placeholder="New York"
+                      placeholder="Mumbai"
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                       required
@@ -226,7 +227,7 @@ function Checkout() {
                     <Label htmlFor="state">State</Label>
                     <Input
                       id="state"
-                      placeholder="NY"
+                      placeholder="Maharashtra"
                       value={state}
                       onChange={(e) => setState(e.target.value)}
                       required
@@ -236,10 +237,10 @@ function Checkout() {
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="zip">ZIP Code</Label>
+                    <Label htmlFor="zip">Pincode</Label>
                     <Input
                       id="zip"
-                      placeholder="10001"
+                      placeholder="400001"
                       value={zip}
                       onChange={(e) => setZip(e.target.value)}
                       required
@@ -253,8 +254,8 @@ function Checkout() {
                         <SelectValue placeholder="Select Country" />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value="IN">India</SelectItem>
                         <SelectItem value="US">United States</SelectItem>
-                        <SelectItem value="CA">Canada</SelectItem>
                         <SelectItem value="UK">United Kingdom</SelectItem>
                         <SelectItem value="AU">Australia</SelectItem>
                       </SelectContent>
@@ -368,15 +369,15 @@ function Checkout() {
                   <span>Free</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Tax</span>
-                  <span>{formatCurrency(cartTotal * 0.1)}</span>
+                  <span className="text-muted-foreground">GST (18%)</span>
+                  <span>{formatCurrency(cartTotal * 0.18)}</span>
                 </div>
                 
                 <Separator className="my-2" />
                 
                 <div className="flex justify-between text-lg font-semibold">
                   <span>Total</span>
-                  <span>{formatCurrency(cartTotal * 1.1)}</span>
+                  <span>{formatCurrency(cartTotal * 1.18)}</span>
                 </div>
               </div>
             </CardContent>
